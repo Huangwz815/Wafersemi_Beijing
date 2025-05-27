@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>仓库管理系统 - 库存</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <h2>📦 当前库存</h2>
+    <a class="btn btn-primary mb-3" href="/records">查看操作记录</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr><th>物品编号</th><th>类别</th><th>存放位置</th><th>当前数量</th></tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4 class="mt-5">➕ 入库 / 出库操作</h4>
+    <form method="POST" action="/operate" class="row g-3">
+        <div class="col-md-3"><input class="form-control" name="item_code" placeholder="物品编号" required></div>
+        <div class="col-md-2"><input class="form-control" name="category" placeholder="类别" required></div>
+        <div class="col-md-1"><input class="form-control" name="quantity" type="number" placeholder="数量" required></div>
+        <div class="col-md-2"><input class="form-control" name="location" placeholder="位置" required></div>
+        <div class="col-md-2">
+            <select class="form-control" name="operation">
+                <option>入库</option>
+                <option>出库</option>
+            </select>
+        </div>
+        <div class="col-md-2"><input class="form-control" name="operator" placeholder="操作人" required></div>
+        <div class="col-md-12"><input class="form-control" name="remarks" placeholder="备注"></div>
+        <div class="col-md-12"><button class="btn btn-success" type="submit">提交操作</button></div>
+    </form>
+</body>
+</html>
